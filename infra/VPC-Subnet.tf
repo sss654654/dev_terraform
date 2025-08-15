@@ -1,3 +1,5 @@
+# dev_terraform-main\infra\VPC-Subnet.tf
+
 # VPC 생성
 resource "aws_vpc" "dev_vpc" {
   cidr_block = "10.0.0.0/16"
@@ -5,6 +7,7 @@ resource "aws_vpc" "dev_vpc" {
   enable_dns_support   = true
   tags = {
     Name = "dev-vpc"
+    "kubernetes.io/cluster/dev-eks-cluster" = "shared"
   }
 }
 
@@ -13,6 +16,7 @@ resource "aws_internet_gateway" "dev_igw" {
   vpc_id = aws_vpc.dev_vpc.id
   tags = {
     Name = "dev-igw"
+    "kubernetes.io/cluster/dev-eks-cluster" = "shared"
   }
 }
 
@@ -24,6 +28,8 @@ resource "aws_subnet" "public_subnet" {
   map_public_ip_on_launch = true # EC2 생성 시 퍼블릭 IP 자동 할당
   tags = {
     Name = "dev-public-subnet"
+    "kubernetes.io/role/elb" = "1"
+    "kubernetes.io/cluster/dev-eks-cluster" = "owned"
   }
 }
 
@@ -48,6 +54,7 @@ resource "aws_subnet" "db_private_subnet" {
   availability_zone = "ap-northeast-2a"
   tags = {
     Name = "dev-db-private-subnet"
+    "kubernetes.io/cluster/dev-eks-cluster" = "shared"
   }
 }
 
@@ -58,6 +65,8 @@ resource "aws_subnet" "eks_fargate_private_subnet" {
   availability_zone = "ap-northeast-2a"
   tags = {
     Name = "dev-eks-fargate-private-subnet"
+    "kubernetes.io/role/internal-elb" = "1"
+    "kubernetes.io/cluster/dev-eks-cluster" = "owned"
   }
 }
 

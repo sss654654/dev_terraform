@@ -25,6 +25,16 @@ resource "aws_instance" "gitlab_instance" {
 }
 */
 
+# EIP 생성
+resource "aws_eip" "gitlab_eip" {
+}
+
+# EIP와 인스턴스 연결
+resource "aws_eip_association" "gitlab_eip_assoc" {
+  instance_id = aws_instance.public_gitlab.id
+  allocation_id = aws_eip.gitlab_eip.id
+}
+
 
 # gitlab용 임시 pulic_subnet
 resource "aws_instance" "public_gitlab" {
@@ -32,9 +42,15 @@ resource "aws_instance" "public_gitlab" {
   instance_type = "t3.medium"
   subnet_id     = aws_subnet.test_public_gitlab_subnet.id # 퍼블릭 서브넷에 생성
   vpc_security_group_ids = [aws_security_group.test_public_gitlab_sg.id]
-  associate_public_ip_address = true # 퍼블릭 IP 주소 할당
+  # associate_public_ip_address = true # 퍼블릭 IP 주소 할당
 
+  key_name = "aws-one393"
   tags = {
     Name = "test-public-gitlab-host"
+  }
+    root_block_device {
+    volume_size = 50
+    volume_type = "gp3" # 또는 "gp3" 등
+    delete_on_termination = false
   }
 }
