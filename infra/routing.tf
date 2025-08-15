@@ -36,7 +36,11 @@ resource "aws_route_table_association" "public_subnet_association" {
   route_table_id = aws_route_table.public_route_table.id
 }
 
-
+# gitlab용 테스트 퍼블릭 서브넷과 라우팅 테이블 연결
+resource "aws_route_table_association" "test_public_gitlab_subnet_association" {
+  subnet_id      = aws_subnet.test_public_gitlab_subnet.id
+  route_table_id = aws_route_table.public_route_table.id
+}
 
 
 # 프라이빗 라우팅 테이블
