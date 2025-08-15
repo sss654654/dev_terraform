@@ -66,11 +66,18 @@ resource "aws_route" "eks_fargate_nat_route" {
   nat_gateway_id         = aws_nat_gateway.dev_nat_gateway.id
 }
 
-# EKS Fargate 프라이빗 서브넷과 라우팅 테이블 연결
-resource "aws_route_table_association" "eks_fargate_subnet_association" {
-  subnet_id      = aws_subnet.eks_fargate_private_subnet.id
+# EKS Fargate 프라이빗 서브넷과 라우팅 테이블 연결 (a)
+resource "aws_route_table_association" "eks_fargate_subnet_association_a" {
+  subnet_id      = aws_subnet.eks_fargate_private_subnet_a.id
   route_table_id = aws_route_table.eks_fargate_private_route_table.id
 }
+
+# EKS Fargate 프라이빗 서브넷과 라우팅 테이블 연결 (c)
+resource "aws_route_table_association" "eks_fargate_subnet_association_c" {
+  subnet_id      = aws_subnet.eks_fargate_private_subnet_c.id
+  route_table_id = aws_route_table.eks_fargate_private_route_table.id
+}
+
 
 # Gitlab 프라이빗 서브넷과 라우팅 테이블 연결
 resource "aws_route_table_association" "gitlab_subnet_association" {

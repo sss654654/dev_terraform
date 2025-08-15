@@ -30,7 +30,7 @@ resource "aws_vpc_endpoint" "eks_fargate_ecr_dkr" {
   vpc_id            = aws_vpc.dev_vpc.id
   service_name      = "com.amazonaws.ap-northeast-2.ecr.dkr"
   vpc_endpoint_type = "Interface"
-  subnet_ids        = [aws_subnet.eks_fargate_private_subnet.id]
+  subnet_ids        = [aws_subnet.eks_fargate_private_subnet_a.id]
   security_group_ids = [aws_security_group.eks_fargate_sg.id] # EKS Fargate 보안 그룹 사용
   tags = {
     Name = "dev-eks-fargate-ecr-dkr-endpoint"
@@ -41,7 +41,7 @@ resource "aws_vpc_endpoint" "eks_fargate_ecr_api" {
   vpc_id            = aws_vpc.dev_vpc.id
   service_name      = "com.amazonaws.ap-northeast-2.ecr.api"
   vpc_endpoint_type = "Interface"
-  subnet_ids        = [aws_subnet.eks_fargate_private_subnet.id]
+  subnet_ids        = [aws_subnet.eks_fargate_private_subnet_a.id]
   security_group_ids = [aws_security_group.eks_fargate_sg.id]
   tags = {
     Name = "dev-eks-fargate-ecr-api-endpoint"

@@ -4,6 +4,14 @@ resource "aws_security_group" "test_public_gitlab_sg" {
   description = "Security group for Bastion Host"
   vpc_id      = aws_vpc.dev_vpc.id
 
+  # gitlab SSH 접속 허용 (본인 IP와 Client VPN IP 대역에서만 허용)
+  ingress {
+    from_port   = 2222
+    to_port     = 2222
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   # SSH 접속 허용 (본인 IP와 Client VPN IP 대역에서만 허용)
   ingress {
     from_port   = 22
@@ -80,7 +88,7 @@ resource "aws_security_group" "db_sg" {
     to_port     = 5432
     protocol    = "tcp"
     # EKS가 위치한 서브넷의 CIDR 블록으로 제한
-    cidr_blocks = [aws_subnet.eks_fargate_private_subnet.cidr_block]
+    cidr_blocks = [aws_subnet.eks_fargate_private_subnet_a.cidr_block]
   }
 
   egress {

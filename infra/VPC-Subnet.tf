@@ -51,13 +51,23 @@ resource "aws_subnet" "db_private_subnet" {
   }
 }
 
-# EKS Fargate Private Subnet
-resource "aws_subnet" "eks_fargate_private_subnet" {
+# EKS Fargate Private Subnet (ap-northeast-2a)
+resource "aws_subnet" "eks_fargate_private_subnet_a" {
   vpc_id            = aws_vpc.dev_vpc.id
   cidr_block        = "10.0.30.0/24"
   availability_zone = "ap-northeast-2a"
   tags = {
-    Name = "dev-eks-fargate-private-subnet"
+    Name = "dev-eks-fargate-private-subnet-a"
+  }
+}
+
+# EKS Fargate Private Subnet (ap-northeast-2c)
+resource "aws_subnet" "eks_fargate_private_subnet_c" {
+  vpc_id            = aws_vpc.dev_vpc.id
+  cidr_block        = "10.0.31.0/24" # CIDR 블록을 다르게 설정
+  availability_zone = "ap-northeast-2c"
+  tags = {
+    Name = "dev-eks-fargate-private-subnet-c"
   }
 }
 
