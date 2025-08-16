@@ -1,3 +1,5 @@
+# Provider는 AWS, Azure, Google Cloud 같은 클라우드 서비스나 Kubernetes, GitHub 같은 
+# 서비스와 상호작용하는 플러그인
 provider "aws" {
   region = "ap-northeast-2"
 }

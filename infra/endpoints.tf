@@ -53,7 +53,7 @@ resource "aws_vpc_endpoint" "eks_fargate_ecr_api" {
 resource "aws_vpc_endpoint" "s3_gateway_endpoint" {
   vpc_id = aws_vpc.dev_vpc.id
   service_name = "com.amazonaws.ap-northeast-2.s3"
-  route_table_ids = [aws_route_table.eks_fargate_private_route_table.id]
+  route_table_ids = [aws_route_table.eks_fargate_private_route_table_a.id]
   tags = {
     Name = "dev-s3-gateway-endpoint"
   }

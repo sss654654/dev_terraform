@@ -51,6 +51,29 @@ resource "aws_instance" "public_gitlab" {
     root_block_device {
     volume_size = 50
     volume_type = "gp3" # 또는 "gp3" 등
-    delete_on_termination = false
+    delete_on_termination = false 
+    # 인스턴스가 삭제될 때 연결된 EBS 볼륨이 함께 삭제되는 것을 방지
+    # 다만 erraform은 aws_instance 리소스의 root_block_device를 보고 EBS 볼륨을 생성하고 인스턴스에 연결
+    # 즉, destroy -> apply 진행하면 새 EBS가 새로운 인스턴스에 붙음(기존 EBS는 유지되긴 함)
   }
 }
+
+/*
+# 독립적인 EBS 볼륨 리소스 정의
+# 이 볼륨은 Terraform Import를 통해 기존 볼륨을 가져와야 함
+resource "aws_ebs_volume" "gitlab_ebs_volume" {
+  availability_zone = aws_subnet.test_public_gitlab_subnet.availability_zone
+  size              = 50
+  type              = "gp3"
+  tags = {
+    Name = "test-public-gitlab-volume"
+  }
+}
+
+# 인스턴스와 EBS 볼륨 연결
+resource "aws_volume_attachment" "gitlab_volume_attachment" {
+  instance_id = aws_instance.public_gitlab.id
+  volume_id   = aws_ebs_volume.gitlab_ebs_volume.id
+  device_name = "/dev/sdh"  # 또는 다른 적절한 디바이스 이름
+}
+*/
