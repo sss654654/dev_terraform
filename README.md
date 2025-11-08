@@ -20,7 +20,7 @@
 
 ### 담당 역할
 **DevOps Engineer & Backend Developer**
-- AWS 인프라 전체 설계 및 Terraform 코드 작성
+- 개발계 AWS 인프라 전체 설계 및 Terraform 코드 작성
 - VPC 네트워크 아키텍처 구성 (서브넷 분리, 라우팅, 보안그룹)
 - EKS Fargate 클러스터 구축 및 VPC 엔드포인트 설정
 - GitLab CI/CD와 연동된 컨테이너 배포 파이프라인 구성
