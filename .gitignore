@@ -5,3 +5,7 @@
 crash.log
 override.tf
 .terraform.lock.hcl
+# 민감값·백엔드 설정
+*.tfvars
+!*.tfvars.example
+backend.hcl

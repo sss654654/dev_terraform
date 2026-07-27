@@ -1,0 +1,5 @@
+# cp backend.hcl.example backend.hcl 후 값을 채운다.
+# terraform init -backend-config=backend.hcl
+
+bucket         = "<state-bucket-name>"
+dynamodb_table = "<state-lock-table-name>"

@@ -1,0 +1,8 @@
+# cp terraform.tfvars.example terraform.tfvars 후 값을 채운다.
+
+admin_cidr_blocks = ["<관리자-공인-IP>/32"]
+key_name          = "<ec2-key-pair-name>"
+
+# Client VPN을 쓸 때만 채운다
+client_vpn_server_certificate_arn = ""
+client_vpn_root_certificate_arn   = ""

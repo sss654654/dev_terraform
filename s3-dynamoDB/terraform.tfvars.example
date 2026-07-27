@@ -1,0 +1,4 @@
+# cp terraform.tfvars.example terraform.tfvars 후 값을 채운다.
+
+state_bucket_name     = "<전역-유일한-버킷-이름>"
+state_lock_table_name = "terraform-locks"

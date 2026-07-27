@@ -165,7 +165,7 @@ resource "aws_security_group" "client_vpn_sg" {
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
-    cidr_blocks = ["211.105.80.175/32"]
+    cidr_blocks = var.admin_cidr_blocks
   }
 
   # VPN 클라이언트가 VPC 내부로 통신할 수 있도록 아웃바운드 트래픽 허용

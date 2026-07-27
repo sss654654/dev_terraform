@@ -44,7 +44,7 @@ resource "aws_instance" "public_gitlab" {
   vpc_security_group_ids = [aws_security_group.test_public_gitlab_sg.id]
   # associate_public_ip_address = true # 퍼블릭 IP 주소 할당
 
-  key_name = "aws-one393"
+  key_name = var.key_name
   tags = {
     Name = "test-public-gitlab-host"
   }

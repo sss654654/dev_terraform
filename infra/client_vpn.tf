@@ -2,7 +2,7 @@
 # Client VPN 엔드포인트 생성
 resource "aws_ec2_client_vpn_endpoint" "dev_client_vpn" {
   description            = "Development Client VPN Endpoint"
-  server_certificate_arn = "arn:aws:acm:ap-northeast-2:732739477448:certificate/70c4a1a6-3111-42fd-891e-a1bf7a3423db"
+  server_certificate_arn = "${var.client_vpn_server_certificate_arn}"
   client_cidr_block      = "172.31.0.0/22"
   transport_protocol     = "tcp"
   split_tunnel           = true
@@ -10,7 +10,7 @@ resource "aws_ec2_client_vpn_endpoint" "dev_client_vpn" {
   vpc_id                 = aws_vpc.dev_vpc.id
   authentication_options {
     type                       = "certificate-authentication"
-    root_certificate_chain_arn = "arn:aws:acm:ap-northeast-2:732739477448:certificate/f4193e57-764c-4782-b858-230a93c38160"
+    root_certificate_chain_arn = "${var.client_vpn_root_certificate_arn}"
   }
 
   connection_log_options {
